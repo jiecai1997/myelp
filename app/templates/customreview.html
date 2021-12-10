@@ -15,7 +15,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-7 text-right">
+    <div class="col-md-6 text-right">
       <div class="form-group">
         <form action="" class="form" method="post">
           <textarea class="form-control" value="<?php echo htmlspecialchars($_GET['review']); ?>" name="review" rows=6 cols=70 placeholder="This place is so cute and has the best burritos ever... 10/10 would recommend!"></textarea>
@@ -24,7 +24,7 @@
       </div>
     </div>
 
-    <div class="col-md-5">
+    <div class="col-md-6">
       <div class="card justify-content-md-center">
         <div class="card-body">
           <h5 class="card-title" style="color:#d9534f">Custom Review</h5>
@@ -46,10 +46,10 @@
         </div>
         <hr>
         <div class="row">
-          <div class="col-md-2">
-            <small><i class="icon ion-android-restaurant"></i></small>
+          <div class="col-md-3">
+            <small>Food <i class="icon ion-android-restaurant"></i></small>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
             <small>
               {%if catscores[0][0] is number%}
                 {%for i in range((catscores[0][0]-0.5)|round|int)%}
@@ -61,10 +61,10 @@
               {% endif %}
             </small>
           </div>
-          <div class="col-md-2">
-            <small><i class="icon ion-ios-flower-outline"></i></small>
+          <div class="col-md-3">
+            <small>Ambiance <i class="icon ion-ios-flower-outline"></i></small>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
             <small>
               {%if catscores[0][1] is number%}
                 {%for i in range((catscores[0][1]-0.5)|round|int)%}
@@ -76,10 +76,10 @@
               {% endif %}
             </small>
           </div>
-          <div class="col-md-2">
-            <small><i class="icon ion-social-usd"></i></small>
+          <div class="col-md-3">
+            <small>Price <i class="icon ion-social-usd"></i></small>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
             <small>
               {%if catscores[0][2] is number%}
                 {%for i in range((catscores[0][2]-0.5)|round|int)%}
@@ -91,10 +91,10 @@
               {% endif %}
             </small>
           </div>
-          <div class="col-md-2">
-            <small><i class="icon ion-bowtie"></i></small>
+          <div class="col-md-3">
+            <small>Service <i class="icon ion-bowtie"></i></small>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
             <small>
               {%if catscores[0][3] is number %}
                 {%for i in range((catscores[0][3]-0.5)|round|int)%}
