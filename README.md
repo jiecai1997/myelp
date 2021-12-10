@@ -1,7 +1,7 @@
 # Ye-nlp
 
 ## Link
-🌐[covis19.herokuapp.com](https://covis19.herokuapp.com)
+🌐[ye-nlp.herokuapp.com](https://ye-nlp.herokuapp.com)
 
 ---
 
