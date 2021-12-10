@@ -26,18 +26,19 @@ for i, file in enumerate(['dict/food.csv', 'dict/ambiance.csv', 'dict/price.csv'
 
 ##### USER REVIEWS SENTIMENTS #####
 def os_single(review):
-	review_str = review.encode('ascii', 'ignore')
+	review_str = review#.encode('ascii', 'ignore')
 	overall_sentiments=[]
 	overall_sentiment=cs_single(review_str)
-	overall_sentiment[0] = filter(lambda a: a != "N/A", overall_sentiment[0])
-	if (len(overall_sentiment[0]) != 0):
-		return float(round_average(sum(overall_sentiment[0], 0.0)/len(overall_sentiment[0])))
+	overall_sentiment_first = [i for i in overall_sentiment[0] if i!='N/A']
+	print(overall_sentiment_first)
+	if (len(overall_sentiment_first) != 0):
+		return float(round_average(sum(overall_sentiment_first, 0.0)/len(overall_sentiment_first)))
 	else:
 		return 'N/A'
 
 def cs_single(review):
 	category_sentiments=[]
-	review_str=review.encode('ascii', 'ignore')
+	review_str=review#.encode('ascii', 'ignore')
 	words = [sentence.words.lower().lemmatize() for sentence in tb(review_str).sentences]
 	sentence_sentiments = [sentence.sentiment.polarity for sentence in tb(review_str).sentences]
 	category_sentiments.append(categories_sentiments(dictionaries, sentence_sentiments, words))
@@ -50,7 +51,7 @@ def overall_sentiments_list(reviews):
 	for i, entry in enumerate(reviews):
 		# review_str - string version of review entry
 		# review_tb - textblob version of review entry
-		review_str = entry["text"].encode('ascii', 'ignore')
+		review_str = entry["text"]#.encode('ascii', 'ignore')
 		review_tb = tb(review_str)
 		overall_sentiments.append(sentiment_value_to_star(review_tb.polarity,0))
 	return overall_sentiments
@@ -58,8 +59,8 @@ def overall_sentiments_list(reviews):
 def overall_sentiments_ave(reviews):
 	overall_sentiments=category_sentiments_list(reviews)
 	overall_sentiments = [item for sublist in overall_sentiments for item in sublist]
-	overall_sentiments = filter(lambda a: a != "N/A", overall_sentiments)
-	#print len(overall_sentiments)
+	overall_sentiments = [sentiment for sentiment in overall_sentiments if sentiment != 'N/A']
+	print(overall_sentiments)
 	return sum(overall_sentiments, 0.0)/len(overall_sentiments)
 	#return round_average(np.mean(np.array(overall_sentiments), dtype=np.float64))
 
@@ -72,8 +73,8 @@ def overall_sentiments_std(reviews):
 ##### CATEGORY SENTIMENTS #####
 def category_sentiments_list(reviews):
 	category_sentiments=[]
-	for i, entry in enumerate(reviews):
-		review_str = entry["text"].encode('ascii', 'ignore')
+	for i, entry in enumerate(reviews[:5]):
+		review_str = entry["text"]#.encode('ascii', 'ignore').decode('utf-8')
 		review_tb = tb(review_str)
 		words = [sentence.words.lower().lemmatize() for sentence in tb(review_str).sentences]
 		sentence_sentiments = [sentence.sentiment.polarity for sentence in tb(review_str).sentences]
@@ -84,7 +85,7 @@ def category_sentiments_ave(reviews):
 	category_sentiments=category_sentiments_list(reviews)
 	category_ave=[]
 	for i, category in enumerate(categories):
-		category_ave.append(round_average(np.mean(np.array([cat[i] for cat in category_sentiments if cat[i] !="N/A"]), dtype=np.float64)))
+		category_ave.append(np.mean(np.array([cat[i] for cat in category_sentiments if cat[i] !="N/A"]), dtype=np.float64))
 	return category_ave
 
 def category_sentiments_std(reviews):
@@ -141,7 +142,7 @@ def categories_sentiments(dictionaries, sentiments, words):
 
 #round to nearest 0.5
 def round_average(average):
-	return round(average*2)/2
+	return(round(average*2)/2)
 
 # converts [-1, 1] sentiment values to [1, 5] star scale
 def sentiment_value_to_star(value_mean, value_std):
