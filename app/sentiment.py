@@ -30,7 +30,7 @@ def os_single(review):
 	overall_sentiments=[]
 	overall_sentiment=cs_single(review_str)
 	overall_sentiment_first = [i for i in overall_sentiment[0] if i!='N/A']
-	print(overall_sentiment_first)
+	#print(overall_sentiment_first)
 	if (len(overall_sentiment_first) != 0):
 		return float(round_average(sum(overall_sentiment_first, 0.0)/len(overall_sentiment_first)))
 	else:
@@ -60,7 +60,7 @@ def overall_sentiments_ave(reviews):
 	overall_sentiments=category_sentiments_list(reviews)
 	overall_sentiments = [item for sublist in overall_sentiments for item in sublist]
 	overall_sentiments = [sentiment for sentiment in overall_sentiments if sentiment != 'N/A']
-	print(overall_sentiments)
+	#print(overall_sentiments)
 	return sum(overall_sentiments, 0.0)/len(overall_sentiments)
 	#return round_average(np.mean(np.array(overall_sentiments), dtype=np.float64))
 
